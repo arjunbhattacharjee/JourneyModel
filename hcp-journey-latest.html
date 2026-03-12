@@ -155,9 +155,9 @@ function icon(name,c){return I[name]?I[name](c):'';}
 
 // ═══════ DATA ═══════
 const SEGS=[
-{id:"seg3",title:"Newly Scouted",tag:"Focus: Disease & Diagnosis",color:"#D4793E",model:"Non-Targeted",modelDesc:"Digital Only",modelCls:"seg-model-digital"},
-{id:"seg2",title:"Hybrid",tag:"Focus: Efficacy & Safety",color:"#2E8FCA",model:"Hybrid",modelDesc:"Digital + Remote",modelCls:"seg-model-hybrid"},
-{id:"seg1",title:"Field Force",tag:"Focus: New Data & RWE",color:"#0FADA0",model:"Field Force",modelDesc:"F2F as Primary",modelCls:"seg-model-field"},
+{id:"seg3",title:"Low Engager",tag:"",color:"#D4793E",model:"Non-Targeted",modelDesc:"Digital Only",modelCls:"seg-model-digital"},
+{id:"seg2",title:"Medium/High Engager",tag:"",color:"#2E8FCA",model:"Hybrid",modelDesc:"Digital + Remote",modelCls:"seg-model-hybrid"},
+{id:"seg1",title:"Field Force",tag:"",color:"#0FADA0",model:"Field Force",modelDesc:"F2F as Primary",modelCls:"seg-model-field"},
 ];
 const STAGES=[
 {id:"awareness",title:"Awareness"},{id:"interest",title:"Interest"},{id:"consideration",title:"Consideration"},
@@ -228,7 +228,7 @@ function render(){
       <div class="seg-dot" style="background:${a?s.color:'#CBD5E1'};${a?'box-shadow:0 0 0 3px '+s.color+'30':''}"></div>
       <div style="text-align:left">
         <div class="seg-title" style="color:${a?s.color:'#374151'}">${s.title}</div>
-        <div class="seg-tag">${s.tag}</div>
+        ${s.tag?`<div class="seg-tag">${s.tag}</div>`:''}
         <div class="seg-model ${s.modelCls}">${s.model} — ${s.modelDesc}</div>
         ${a?'<div style="font-size:8px;color:'+s.color+';font-weight:700;margin-top:2px;letter-spacing:.5px">● ACTIVE JOURNEY</div>':'<div class="seg-hint">Click to view journey →</div>'}
       </div>
