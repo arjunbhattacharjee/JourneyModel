@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lilly Canada – Be The First To Know</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      background: #fff;
+      color: #222;
+    }
+
+    /* ── NAV (compact) ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 32px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      height: 48px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      line-height: 1;
+    }
+    .logo-name {
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 700;
+      color: #C41230;
+      letter-spacing: -0.5px;
+    }
+    .logo-tagline {
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: #222;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .lang-toggle button {
+      padding: 5px 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .lang-toggle .active {
+      background: #C41230;
+      color: #fff;
+    }
+    .lang-toggle .inactive {
+      background: #222;
+      color: #ccc;
+    }
+    .lang-toggle .inactive:hover { color: #fff; }
+
+    /* ── HERO (reduced height) ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4a3728 0%, #8b6e5a 40%, #c4a882 100%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 40px;
+      left: 48px;
+      color: #fff;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-headline {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.0;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    /* ── CONTENT SECTION ── */
+    .content-section {
+      background: #fdf5f3;
+      padding: 56px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .left-col h2 {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #222;
+      margin-bottom: 28px;
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: #f5e0dc;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .card-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon svg {
+      width: 34px;
+      height: 34px;
+      stroke: #C41230;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .card-body h3 {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #C41230;
+      margin-bottom: 4px;
+    }
+    .card-body p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    /* ── FORM ── */
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .form-group label .required {
+      color: #C41230;
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 9px 12px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #222;
+      background: #fff;
+      transition: border-color 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #C41230;
+    }
+
+    .form-group input.invalid,
+    .form-group select.invalid {
+      border-color: #C41230;
+      background: #fff8f8;
+    }
+
+    /* ── HOSPITAL PICKER ── */
+    .hospital-search-wrapper {
+      position: relative;
+    }
+
+    .hospital-search-wrapper input {
+      width: 100%;
+    }
+
+    .hospital-loading {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ddd;
+      border-top-color: #C41230;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+    .hospital-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+      z-index: 100;
+      max-height: 220px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .hospital-dropdown.visible { display: block; }
+
+    .hospital-option {
+      padding: 10px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.15s;
+    }
+    .hospital-option:last-child { border-bottom: none; }
+    .hospital-option:hover, .hospital-option.focused { background: #fdf5f3; }
+
+    .hospital-option-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #222;
+    }
+    .hospital-option-address {
+      font-size: 11px;
+      color: #777;
+      margin-top: 2px;
+    }
+
+    .hospital-selected-tag {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: #f5e0dc;
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-size: 12px;
+      color: #333;
+      margin-top: 4px;
+    }
+    .hospital-selected-tag.visible { display: flex; }
+    .hospital-selected-tag span { flex: 1; }
+    .hospital-clear-btn {
+      background: none;
+      border: none;
+      color: #C41230;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      padding: 0 2px;
+      font-weight: 700;
+    }
+    .hospital-clear-btn:hover { color: #a50f28; }
+
+    .hospital-no-results {
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #777;
+      text-align: center;
+    }
+
+    /* ── CONSENT ── */
+    .consent-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #f5e0dc;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 2px;
+    }
+
+    .consent-group input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: #C41230;
+      cursor: pointer;
+    }
+
+    .consent-group label {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #333;
+      cursor: pointer;
+      text-transform: none;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .consent-group label .required { color: #C41230; }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 14px 36px;
+      background: #C41230;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 2px;
+      width: 100%;
+    }
+    .btn-submit:hover { background: #a50f28; }
+    .btn-submit .arrow {
+      font-size: 18px;
+      letter-spacing: -4px;
+    }
+
+    .form-success {
+      display: none;
+      background: #edfaf3;
+      border: 1.5px solid #34c976;
+      border-radius: 10px;
+      padding: 20px 24px;
+      color: #1a6e3d;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .field-error {
+      font-size: 11px;
+      color: #C41230;
+      margin-top: 2px;
+      display: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 8px 16px; }
+      .hero { height: 220px; }
+      .hero-headline { font-size: 32px; }
+      .hero-content { left: 20px; bottom: 24px; }
+      .content-section {
+        grid-template-columns: 1fr;
+        padding: 36px 20px;
+        gap: 32px;
+      }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <span class="logo-name">Lilly</span>
+      <span class="logo-tagline">A Medicine Company</span>
+    </div>
+    <div class="lang-toggle">
+      <button class="active">EN</button>
+      <button class="inactive">FR</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!--
+      Replace the div below with:
+      <img class="hero-img" src="your-lab-photo.jpg" alt="Healthcare professional in laboratory" />
+    -->
+    <div class="hero-placeholder"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">For Canadian Healthcare Professionals</p>
+      <h1 class="hero-headline">Be The First<br>To Know</h1>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section" id="signup">
+
+    <div class="left-col">
+      <h2>Don't miss product updates, programs and resources created just for you. Subscribe to Lilly communications today.</h2>
+
+      <form class="signup-form" id="signupForm" novalidate>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+          <span class="field-error" id="email-error">Please enter a valid email address.</span>
+        </div>
+
+        <!-- First & Last Name -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name <span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" placeholder="First name" autocomplete="given-name" />
+            <span class="field-error" id="firstName-error">First name is required.</span>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name <span class="required">*</span></label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last name" autocomplete="family-name" />
+            <span class="field-error" id="lastName-error">Last name is required.</span>
+          </div>
+        </div>
+
+        <!-- Specialty -->
+        <div class="form-group">
+          <label for="specialty">Specialty <span class="required">*</span></label>
+          <select id="specialty" name="specialty">
+            <option value="">Select your specialty…</option>
+            <option>Family Medicine / General Practice</option>
+            <option>Internal Medicine</option>
+            <option>Endocrinology</option>
+            <option>Cardiology</option>
+            <option>Psychiatry</option>
+            <option>Oncology</option>
+            <option>Dermatology</option>
+            <option>Neurology</option>
+            <option>Rheumatology</option>
+            <option>Other</option>
+          </select>
+          <span class="field-error" id="specialty-error">Please select your specialty.</span>
+        </div>
+
+        <!-- Hospital / Clinic Picker -->
+        <div class="form-group">
+          <label for="hospitalSearch">Hospital / Clinic <span class="required">*</span></label>
+          <div class="hospital-search-wrapper">
+            <input
+              type="text"
+              id="hospitalSearch"
+              name="hospitalSearch"
+              placeholder="Type hospital or clinic name…"
+              autocomplete="off"
+              aria-autocomplete="list"
+              aria-controls="hospitalDropdown"
+            />
+            <div class="hospital-loading" id="hospitalLoading"></div>
+            <div class="hospital-dropdown" id="hospitalDropdown" role="listbox"></div>
+          </div>
+          <!-- Selected hospital confirmation tag -->
+          <div class="hospital-selected-tag" id="hospitalSelectedTag">
+            <span id="hospitalSelectedLabel"></span>
+            <button type="button" class="hospital-clear-btn" id="hospitalClearBtn" aria-label="Clear selected hospital">✕</button>
+          </div>
+          <!-- Hidden fields storing structured data -->
+          <input type="hidden" id="hospitalName"    name="hospitalName" />
+          <input type="hidden" id="hospitalAddress" name="hospitalAddress" />
+          <input type="hidden" id="hospitalPostal"  name="hospitalPostal" />
+          <span class="field-error" id="hospitalSearch-error">Please search and select your hospital or clinic.</span>
+        </div>
+
+        <!-- Email Consent -->
+        <div class="consent-group">
+          <input type="checkbox" id="emailConsent" name="emailConsent" />
+          <label for="emailConsent">
+            I consent to receiving electronic communications from Lilly Canada including product updates, programs, events and educational resources. I understand I may withdraw consent at any time. <span class="required">*</span>
+          </label>
+        </div>
+        <span class="field-error" id="consent-error" style="margin-left:4px;">You must consent to receive communications to sign up.</span>
+
+        <button type="submit" class="btn-submit">
+          Sign Up Now
+          <span class="arrow">&#8594;&#8594;</span>
+        </button>
+
+        <div class="form-success" id="formSuccess">
+          ✓ Thank you for subscribing! You'll hear from us soon.
+        </div>
+
+      </form>
+    </div>
+
+    <div class="cards">
+
+      <!-- Product Info -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/>
+            <path d="M9 4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9V4z"/>
+            <line x1="9" y1="10" x2="15" y2="10"/>
+            <line x1="9" y1="14" x2="15" y2="14"/>
+            <line x1="9" y1="18" x2="12" y2="18"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Product Info</h3>
+          <p>Access product monographs, product information and more from Lilly Canada</p>
+        </div>
+      </div>
+
+      <!-- Access Programs -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="8" stroke-linecap="round" stroke-width="2.5"/>
+            <line x1="12" y1="11" x2="12" y2="17"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Access Programs</h3>
+          <p>Learn about Patient Support Programs, Savings Cards and reimbursement support</p>
+        </div>
+      </div>
+
+      <!-- Patient Materials -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="7" r="3"/>
+            <path d="M6 21v-1a6 6 0 0 1 12 0v1"/>
+            <rect x="14" y="12" width="7" height="9" rx="1"/>
+            <line x1="16" y1="15" x2="19" y2="15"/>
+            <line x1="16" y1="18" x2="19" y2="18"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Patient Materials</h3>
+          <p>Get brochures, tearpads and other educational materials to share with your patients</p>
+        </div>
+      </div>
+
+      <!-- Events & CME -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <polyline points="9,15 11,17 15,13"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Events &amp; CME</h3>
+          <p>Exclusive invitations to symposia, webinars and CME events coming to your area</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    /* ────────────────────────────────────────────
+       HOSPITAL PICKER
+       Stage 1: Nominatim  — specific name search
+       Stage 2: Overpass   — city-based fallback
+       Both free, no API key, full CORS support
+    ──────────────────────────────────────────── */
+    const hospitalSearchInput   = document.getElementById('hospitalSearch');
+    const hospitalDropdown      = document.getElementById('hospitalDropdown');
+    const hospitalLoading       = document.getElementById('hospitalLoading');
+    const hospitalSelectedTag   = document.getElementById('hospitalSelectedTag');
+    const hospitalSelectedLabel = document.getElementById('hospitalSelectedLabel');
+    const hospitalClearBtn      = document.getElementById('hospitalClearBtn');
+
+    let searchTimeout  = null;
+    let focusedIndex   = -1;
+    let currentResults = [];
+    let hospitalChosen = false;
+
+    const MEDICAL_TYPES = new Set([
+      'hospital','clinic','doctors','dentist',
+      'health_centre','nursing_home','blood_bank'
+    ]);
+    const MEDICAL_WORDS = [
+      'hospital','clinic','medical','health','centre','center',
+      'hôpital','clinique','santé','médical','surgery','infirmary',
+      'dispensary','polyclinic','healthcare','general','regional','memorial'
+    ];
+
+    /* Build a clean display address from Nominatim address object */
+    function buildAddress(addr) {
+      const parts = [];
+      if (addr.house_number && addr.road) parts.push(addr.house_number + ' ' + addr.road);
+      else if (addr.road) parts.push(addr.road);
+      if (addr.suburb || addr.neighbourhood) parts.push(addr.suburb || addr.neighbourhood);
+      if (addr.city || addr.town || addr.village || addr.municipality)
+        parts.push(addr.city || addr.town || addr.village || addr.municipality);
+      if (addr.state || addr.province) parts.push(addr.state || addr.province);
+      if (addr.postcode) parts.push(addr.postcode);
+      if (addr.country) parts.push(addr.country);
+      return parts.join(', ');
+    }
+
+    function extractPostal(addr) { return (addr && addr.postcode) || ''; }
+
+    function isMedical(r) {
+      const type = (r.type  || '').toLowerCase();
+      const cls  = (r.class || '').toLowerCase();
+      const name = (r.name  || r.display_name || '').toLowerCase();
+      return (cls === 'amenity' && MEDICAL_TYPES.has(type)) ||
+             MEDICAL_WORDS.some(w => name.includes(w));
+    }
+
+    /* ── Stage 1: Nominatim name search ── */
+    async function nominatimSearch(query) {
+      const params = new URLSearchParams({
+        q: query, format: 'json',
+        addressdetails: '1', limit: '10', dedupe: '1'
+      });
+      const resp = await fetch(
+        `https://nominatim.openstreetmap.org/search?${params}`,
+        { headers: { 'Accept-Language': 'en' } }
+      );
+      if (!resp.ok) throw new Error('Nominatim failed');
+      const data = await resp.json();
+      return data.filter(isMedical).slice(0, 7);
+    }
+
+    /* ── Stage 2: Overpass city search ──
+       When query looks like a city name (short, no hospital keywords),
+       find the city's bounding box via Nominatim then list all
+       hospitals/clinics in that area via Overpass.
+    ── */
+    async function overpassCitySearch(cityName) {
+      // Step 2a: resolve city to bbox via Nominatim
+      const geoParams = new URLSearchParams({
+        q: cityName, format: 'json', limit: '1',
+        featuretype: 'city,town,municipality'
+      });
+      const geoResp = await fetch(
+        `https://nominatim.openstreetmap.org/search?${geoParams}`,
+        { headers: { 'Accept-Language': 'en' } }
+      );
+      const geoData = await geoResp.json();
+      if (!geoData.length) return [];
+
+      const bb = geoData[0].boundingbox; // [minlat, maxlat, minlon, maxlon]
+      const [s, n, w, e] = bb;
+
+      // Step 2b: query Overpass for medical amenities in that bbox
+      const overpassQuery = `
+        [out:json][timeout:10];
+        (
+          node["amenity"~"hospital|clinic|doctors|health_centre"](${s},${w},${n},${e});
+          way["amenity"~"hospital|clinic|doctors|health_centre"](${s},${w},${n},${e});
+        );
+        out center tags 20;
+      `;
+      const overpassResp = await fetch('https://overpass-api.de/api/interpreter', {
+        method: 'POST',
+        body: 'data=' + encodeURIComponent(overpassQuery)
+      });
+      if (!overpassResp.ok) throw new Error('Overpass failed');
+      const overpassData = await overpassResp.json();
+
+      // Convert Overpass elements to Nominatim-like shape for renderDropdown
+      return overpassData.elements
+        .filter(el => el.tags && el.tags.name)
+        .map(el => {
+          const tags = el.tags;
+          const lat  = el.lat || (el.center && el.center.lat) || '';
+          const lon  = el.lon || (el.center && el.center.lon) || '';
+          const addrParts = [
+            tags['addr:housenumber'] && tags['addr:street']
+              ? tags['addr:housenumber'] + ' ' + tags['addr:street']
+              : tags['addr:street'],
+            tags['addr:city'] || geoData[0].display_name.split(',')[0],
+            tags['addr:postcode']
+          ].filter(Boolean);
+          return {
+            name:         tags.name,
+            display_name: tags.name + (addrParts.length ? ', ' + addrParts.join(', ') : ''),
+            address: {
+              road:     tags['addr:street'] || '',
+              city:     tags['addr:city']   || geoData[0].display_name.split(',')[0],
+              postcode: tags['addr:postcode'] || '',
+              country:  tags['addr:country'] || ''
+            },
+            _addrString: addrParts.join(', ')
+          };
+        })
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .slice(0, 10);
+    }
+
+    /* ── Decide which search strategy to use ── */
+    function looksLikeCityOnly(query) {
+      const q = query.trim().toLowerCase();
+      // Short query with no medical keywords → likely a city name
+      return q.split(' ').length <= 2 &&
+             !MEDICAL_WORDS.some(w => q.includes(w));
+    }
+
+    async function searchHospitals(query) {
+      // Always run Nominatim first
+      const nominatimResults = await nominatimSearch(query);
+
+      // If Nominatim found matches, return them
+      if (nominatimResults.length > 0) return nominatimResults;
+
+      // Otherwise, if it looks like a city, try Overpass
+      if (looksLikeCityOnly(query)) {
+        return await overpassCitySearch(query);
+      }
+
+      return [];
+    }
+
+    function renderDropdown(results) {
+      hospitalDropdown.innerHTML = '';
+      focusedIndex = -1;
+
+      if (results.length === 0) {
+        hospitalDropdown.innerHTML = '<div class="hospital-no-results">No results found. Try typing a hospital name or just your city (e.g. "Toronto" or "Vancouver General").</div>';
+        hospitalDropdown.classList.add('visible');
+        return;
+      }
+
+      results.forEach((r, i) => {
+        const name     = r.name || r.display_name.split(',')[0];
+        const fullAddr = r._addrString || buildAddress(r.address || {});
+
+        const div = document.createElement('div');
+        div.className = 'hospital-option';
+        div.setAttribute('role', 'option');
+        div.setAttribute('data-index', i);
+        div.innerHTML = `
+          <div class="hospital-option-name">${name}</div>
+          <div class="hospital-option-address">${fullAddr}</div>
+        `;
+        div.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          selectHospital(r, name, fullAddr);
+        });
+        hospitalDropdown.appendChild(div);
+      });
+
+      currentResults = results;
+      hospitalDropdown.classList.add('visible');
+    }
+
+    function selectHospital(result, name, address) {
+      const postal = extractPostal(result.address || {});
+
+      // Store in hidden fields
+      document.getElementById('hospitalName').value    = name;
+      document.getElementById('hospitalAddress').value = address;
+      document.getElementById('hospitalPostal').value  = postal;
+
+      // Show confirmation tag, hide input
+      hospitalSelectedLabel.textContent = name + (address ? ' — ' + address : '');
+      hospitalSelectedTag.classList.add('visible');
+      hospitalSearchInput.style.display = 'none';
+      hospitalDropdown.classList.remove('visible');
+      hospitalDropdown.innerHTML = '';
+      hospitalSearchInput.value = name;
+
+      hospitalChosen = true;
+      showError('hospitalSearch', false);
+    }
+
+    hospitalClearBtn.addEventListener('click', () => {
+      document.getElementById('hospitalName').value    = '';
+      document.getElementById('hospitalAddress').value = '';
+      document.getElementById('hospitalPostal').value  = '';
+      hospitalSelectedTag.classList.remove('visible');
+      hospitalSearchInput.style.display = '';
+      hospitalSearchInput.value = '';
+      hospitalSearchInput.focus();
+      hospitalChosen = false;
+    });
+
+    hospitalSearchInput.addEventListener('input', () => {
+      const q = hospitalSearchInput.value.trim();
+      clearTimeout(searchTimeout);
+
+      if (q.length < 3) {
+        hospitalDropdown.classList.remove('visible');
+        hospitalDropdown.innerHTML = '';
+        hospitalLoading.style.display = 'none';
+        return;
+      }
+
+      hospitalLoading.style.display = 'block';
+      searchTimeout = setTimeout(async () => {
+        try {
+          const results = await searchHospitals(q);
+          renderDropdown(results);
+        } catch (err) {
+          hospitalDropdown.innerHTML = '<div class="hospital-no-results">Search unavailable. Please try again.</div>';
+          hospitalDropdown.classList.add('visible');
+        } finally {
+          hospitalLoading.style.display = 'none';
+        }
+      }, 400);
+    });
+
+    // Keyboard navigation
+    hospitalSearchInput.addEventListener('keydown', (e) => {
+      const opts = hospitalDropdown.querySelectorAll('.hospital-option');
+      if (!opts.length) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        focusedIndex = Math.min(focusedIndex + 1, opts.length - 1);
+        opts.forEach((o, i) => o.classList.toggle('focused', i === focusedIndex));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        focusedIndex = Math.max(focusedIndex - 1, 0);
+        opts.forEach((o, i) => o.classList.toggle('focused', i === focusedIndex));
+      } else if (e.key === 'Enter' && focusedIndex >= 0) {
+        e.preventDefault();
+        const r    = currentResults[focusedIndex];
+        const name = r.name || r.display_name.split(',')[0];
+        const addr = r._addrString || buildAddress(r.address || {});
+        selectHospital(r, name, addr);
+      } else if (e.key === 'Escape') {
+        hospitalDropdown.classList.remove('visible');
+      }
+    });
+
+    // Close dropdown on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.hospital-search-wrapper')) {
+        hospitalDropdown.classList.remove('visible');
+      }
+    });
+
+    /* ────────────────────────────────────────────
+       FORM VALIDATION
+    ──────────────────────────────────────────── */
+    const form       = document.getElementById('signupForm');
+    const successMsg = document.getElementById('formSuccess');
+
+    function showError(fieldId, show) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(fieldId + '-error');
+      if (!error) return;
+      error.style.display = show ? 'block' : 'none';
+      if (field) {
+        if (show) field.classList.add('invalid');
+        else field.classList.remove('invalid');
+      }
+    }
+
+    function validate() {
+      let valid = true;
+
+      const email   = document.getElementById('email').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      showError('email', !emailOk);
+      if (!emailOk) valid = false;
+
+      const firstName = document.getElementById('firstName').value.trim();
+      showError('firstName', !firstName);
+      if (!firstName) valid = false;
+
+      const lastName = document.getElementById('lastName').value.trim();
+      showError('lastName', !lastName);
+      if (!lastName) valid = false;
+
+      const specialty = document.getElementById('specialty').value;
+      showError('specialty', !specialty);
+      if (!specialty) valid = false;
+
+      // Hospital — must have been selected from dropdown
+      if (!hospitalChosen || !document.getElementById('hospitalName').value) {
+        showError('hospitalSearch', true);
+        valid = false;
+      } else {
+        showError('hospitalSearch', false);
+      }
+
+      const consent = document.getElementById('emailConsent').checked;
+      const consentError = document.getElementById('consent-error');
+      const consentBox   = document.getElementById('emailConsent');
+      consentError.style.display = consent ? 'none' : 'block';
+      consentBox.style.outline   = consent ? '' : '2px solid #C41230';
+      if (!consent) valid = false;
+
+      return valid;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (validate()) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      }
+    });
+
+    // Clear errors on input
+    ['email','firstName','lastName','specialty'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', () => showError(id, false));
+    });
+
+    document.getElementById('emailConsent').addEventListener('change', function() {
+      document.getElementById('consent-error').style.display = 'none';
+      this.style.outline = '';
+    });
+  </script>
+
+</body>
+</html>
