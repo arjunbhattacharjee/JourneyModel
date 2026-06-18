@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Districts — Q2 2026 Update | IBU Tech Leaders</title>
+  <style>
+    /* ── Lilly BOLD BLUE scheme ─────────────────────────────────────────
+       primary_bg:   #0F3A85   primary_text: #FFFFFF
+       accent:       #99BFE5   dark_bg:      #E1251B
+       dark_text:    #FFFFFF   secondary_bg: #E4EBF1
+       body text:    #212121
+    ──────────────────────────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #E4EBF1;
+      color: #212121;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #0F3A85;
+      color: #FFFFFF;
+      padding: 0;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 32px 24px;
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #99BFE5;
+      margin-bottom: 12px;
+    }
+    .header-title {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    .header-subtitle {
+      font-size: 14px;
+      color: #99BFE5;
+      margin-bottom: 20px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .header-meta span {
+      font-size: 12px;
+      color: #99BFE5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-meta span::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #99BFE5;
+    }
+
+    /* ── RED ACCENT BAR ── */
+    .accent-bar {
+      background: #E1251B;
+      height: 4px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 32px 48px;
+    }
+
+    /* ── MISSION STATEMENT ── */
+    .mission-box {
+      background: #0F3A85;
+      border-left: 5px solid #E1251B;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      color: #FFFFFF;
+    }
+    .mission-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #99BFE5;
+      margin-bottom: 8px;
+    }
+    .mission-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #FFFFFF;
+    }
+    .mission-text strong {
+      color: #99BFE5;
+    }
+
+    /* ── PILLAR GRID ── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .pillar-chip {
+      background: #0F3A85;
+      color: #FFFFFF;
+      border-radius: 6px;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .pillar-chip:hover {
+      border-color: #99BFE5;
+      background: #1a4a99;
+    }
+    .pillar-chip .chip-num {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    .pillar-chip.p1 { border-top: 3px solid #99BFE5; }
+    .pillar-chip.p2 { border-top: 3px solid #E1251B; }
+    .pillar-chip.p3 { border-top: 3px solid #FFC709; }
+    .pillar-chip.p4 { border-top: 3px solid #C6DCD8; }
+
+    /* ── SECTION HEADER ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #0F3A85;
+      margin-bottom: 16px;
+      margin-top: 8px;
+    }
+
+    /* ── ACCORDION ── */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .accordion-item {
+      background: #FFFFFF;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15,58,133,0.10);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      background: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+    .accordion-trigger:hover {
+      background: #f5f8ff;
+    }
+    .accordion-trigger.open {
+      background: #0F3A85;
+    }
+
+    .trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pillar-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .badge-1 { background: #E4EBF1; }
+    .badge-2 { background: #FDE8E5; }
+    .badge-3 { background: #E4EBF1; }
+    .badge-4 { background: #C6DCD8; }
+
+    .trigger-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #212121;
+      line-height: 1.2;
+    }
+    .trigger-sub {
+      font-size: 12px;
+      color: #8A969E;
+      margin-top: 2px;
+    }
+    .accordion-trigger.open .trigger-title,
+    .accordion-trigger.open .trigger-sub {
+      color: #FFFFFF;
+    }
+    .accordion-trigger.open .trigger-sub {
+      color: #99BFE5;
+    }
+
+    .chevron {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #E4EBF1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s, background 0.2s;
+      font-size: 11px;
+      color: #0F3A85;
+      font-weight: 900;
+    }
+    .accordion-trigger.open .chevron {
+      transform: rotate(180deg);
+      background: rgba(153,191,229,0.25);
+      color: #99BFE5;
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 24px 24px;
+      background: #FFFFFF;
+    }
+    .accordion-body.open {
+      display: block;
+    }
+
+    .body-divider {
+      height: 1px;
+      background: #E4EBF1;
+      margin-bottom: 20px;
+    }
+
+    /* ── SUB-ITEMS ── */
+    .sub-item {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #E4EBF1;
+    }
+    .sub-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .sub-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F3A85;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .sub-title::before {
+      content: '▸';
+      color: #E1251B;
+      font-size: 11px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .sub-body {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #212121;
+      padding-left: 18px;
+    }
+
+    .sub-body a {
+      color: #0F3A85;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .sub-body a:hover {
+      color: #E1251B;
+    }
+
+    /* ── STAT CHIPS ── */
+    .stat-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 10px 0 8px 18px;
+    }
+    .stat-chip {
+      background: #E4EBF1;
+      border-left: 3px solid #0F3A85;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #212121;
+    }
+    .stat-chip strong {
+      color: #0F3A85;
+      font-size: 15px;
+      display: block;
+      line-height: 1.2;
+    }
+
+    /* ── TAG / BADGE PILLS ── */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .tag-active { background: #C6DCD8; color: #144B2D; }
+    .tag-wip { background: #FFF0D8; color: #521207; }
+    .tag-planned { background: #E4EBF1; color: #0F3A85; }
+    .tag-new { background: #FDE8E5; color: #E1251B; }
+
+    /* ── CONTACT BOX ── */
+    .contact-box {
+      background: #E4EBF1;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #212121;
+      margin-top: 10px;
+      margin-left: 18px;
+      border-left: 3px solid #99BFE5;
+    }
+    .contact-box strong { color: #0F3A85; }
+
+    /* ── CLOSING / FOOTER ── */
+    .closing {
+      background: #0F3A85;
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 32px;
+      color: #FFFFFF;
+    }
+    .closing-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #99BFE5;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+    .closing-body {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #FFFFFF;
+    }
+    .closing-sig {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #99BFE5;
+    }
+
+    .legal {
+      text-align: center;
+      font-size: 10px;
+      color: #8A969E;
+      margin-top: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 600px) {
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+      .header-inner { padding: 24px 16px 20px; }
+      .main { padding: 20px 16px 40px; }
+      .stat-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">IBU Digital &amp; Technology · Q2 2026 Update</div>
+    <div class="header-title">Digital Districts — Q2 Progress Update</div>
+    <div class="header-subtitle">Engagements@Scale · For IBU Tech Leaders</div>
+    <div class="header-meta">
+      <span>June 2026</span>
+      <span>Digital Engagements@Scale Team</span>
+      <span>4 Pillars · Mounjaro &amp; Foundayo</span>
+    </div>
+  </div>
+</div>
+<div class="accent-bar"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════════ -->
+<div class="main">
+
+  <!-- MISSION -->
+  <div class="mission-box">
+    <div class="mission-label">What is Digital Districts?</div>
+    <div class="mission-text">
+      An <strong>always-on digital operating model</strong> designed to reach up to <strong>10× more HCPs</strong> than face-to-face alone — converting non-visited HCPs into prescribers or qualified F2F targets through a scalable digital front door. Launched first for <strong>Mounjaro</strong>, followed by <strong>Foundayo</strong>.
+    </div>
+  </div>
+
+  <!-- PILLAR NAV CHIPS -->
+  <div class="section-label">Four Pillars at a Glance</div>
+  <div class="pillars-grid">
+    <a class="pillar-chip p1" href="#" onclick="toggleById('pillar-1'); return false;">
+      <span class="chip-num">🔐</span>1. Consent
+    </a>
+    <a class="pillar-chip p2" href="#" onclick="toggleById('pillar-2'); return false;">
+      <span class="chip-num">📄</span>2. Content &amp; Journeys
+    </a>
+    <a class="pillar-chip p3" href="#" onclick="toggleById('pillar-3'); return false;">
+      <span class="chip-num">🖥️</span>3. Platforms
+    </a>
+    <a class="pillar-chip p4" href="#" onclick="toggleById('pillar-4'); return false;">
+      <span class="chip-num">📊</span>4. AT &amp; Measurement
+    </a>
+  </div>
+
+  <!-- ACCORDION SECTION LABEL -->
+  <div class="section-label" style="margin-top:24px;">Q2 2026 Updates by Pillar — Click to Expand</div>
+
+  <div class="accordion">
+
+    <!-- ═══════════════════ PILLAR 1: CONSENT ═══════════════════ -->
+    <div class="accordion-item" id="pillar-1">
+      <button class="accordion-trigger" onclick="toggle(this)">
+        <div class="trigger-left">
+          <div class="pillar-badge badge-1">🔐</div>
+          <div>
+            <div class="trigger-title">Pillar 1 — Consent</div>
+            <div class="trigger-sub">Acquisition · Reconciliation · WhatsApp</div>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="body-divider"></div>
+
+        <!-- 1a: Acquisition -->
+        <div class="sub-item">
+          <div class="sub-title">Consent Acquisition</div>
+          <div class="sub-body">
+            Strong momentum on consent acquisition from non-target HCPs across the digital universe:
+          </div>
+          <div class="stat-row">
+            <div class="stat-chip"><strong>420K</strong>Consents acquired</div>
+            <div class="stat-chip"><strong>21%</strong>of ~2M HCP universe</div>
+            <div class="stat-chip"><strong>~290K</strong>Reconciled</div>
+          </div>
+          <div class="sub-body">
+            For country-specific breakdowns, visit the <a href="https://app.powerbi.com/groups/me/reports/bb15842a-ed62-40b4-85af-c462b3b30009/062df73fa7ad671014d1?experience=power-bi" target="_blank">Digital Districts Power BI Dashboard →</a>
+          </div>
+        </div>
+
+        <!-- 1b: Bulk Upload -->
+        <div class="sub-item">
+          <div class="sub-title">Consents Bulk Upload</div>
+          <div class="sub-body">
+            Good progress across affiliates — approximately <strong>30+ requests</strong> processed with over <strong>5,000 consents uploaded</strong> via bulk workflow to date.
+          </div>
+        </div>
+
+        <!-- 1c: Reconciliation -->
+        <div class="sub-item">
+          <div class="sub-title">Consents Reconciliation</div>
+          <div class="sub-body">
+            Two regional solutions are actively being explored to address gaps in HCO address data:
+            <br /><br />
+            • <strong>IQVIA HCA API</strong> — evaluated for automated reconciliation of non-reconciled records; <strong>go-live targeted by end of July</strong><br />
+            • <strong>Google Maps API</strong> — complementary data enrichment for hospital address data gaps; currently in <strong>POC stage</strong> — reach out if you would like to be part of it<br />
+            • <strong>Gulf &amp; ANZ affiliates</strong> have additionally introduced automation and AI-assisted initiatives to accelerate gap resolution in their markets.
+          </div>
+        </div>
+
+        <!-- 1d: WhatsApp -->
+        <div class="sub-item">
+          <div class="sub-title">WhatsApp Consent <span style="margin-left:6px;" class="tag tag-new">New Policy</span></div>
+          <div class="sub-body">
+            A <strong>separate, dedicated consent for WhatsApp</strong> is now mandated by Global Legal / GPO. Key points for affiliates:
+            <br /><br />
+            • Affiliates may <strong>initiate local consent collection</strong> using existing local process and storage now<br />
+            • Timelines for <strong>GCCP and global platform readiness</strong> will be communicated as confirmed<br />
+            • An assessment is underway to evaluate integration of <strong>GCCP with local WhatsApp vendors and Sprinklr</strong> to ensure compliant opt-out handling across channels
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════ PILLAR 2: CONTENT & JOURNEYS ═══════════════════ -->
+    <div class="accordion-item" id="pillar-2">
+      <button class="accordion-trigger" onclick="toggle(this)">
+        <div class="trigger-left">
+          <div class="pillar-badge badge-2">📄</div>
+          <div>
+            <div class="trigger-title">Pillar 2 — Content &amp; Journeys</div>
+            <div class="trigger-sub">Content Waves · Journey Builder · Active Affiliates</div>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="body-divider"></div>
+
+        <!-- 2a: Content -->
+        <div class="sub-item">
+          <div class="sub-title">Content — Wave Status</div>
+          <div class="sub-body">Content rollout is progressing across three waves:</div>
+          <div class="tag-row" style="margin-bottom:10px;">
+            <span class="tag tag-active">Wave 1 Released</span>
+            <span class="tag tag-active">Wave 2 Released</span>
+            <span class="tag tag-wip">Wave 3 In Progress</span>
+          </div>
+          <div class="sub-body">
+            • <strong>Wave 1</strong> — DSE-related content and tactics: <span class="tag tag-active" style="font-size:10px;">Released</span><br />
+            • <strong>Wave 2</strong> — Foundayo Obesity content and tactics: <span class="tag tag-active" style="font-size:10px;">Released</span><br />
+            • <strong>Wave 3</strong> — Foundayo T2D and Foundayo Dual Branded tactics: <span class="tag tag-wip" style="font-size:10px;">Work in Progress</span>
+          </div>
+        </div>
+
+        <!-- 2b: Journey Builder -->
+        <div class="sub-item">
+          <div class="sub-title">Journey Builder</div>
+          <div class="sub-body">
+            Journey Builder capability continues to be a core focus. An <strong>implementation guide was shared in May 2026</strong>. Active journeys are currently live in:
+          </div>
+          <div class="tag-row" style="margin-bottom:10px;">
+            <span class="tag tag-active">Brazil</span>
+            <span class="tag tag-active">China</span>
+            <span class="tag tag-active">Colombia</span>
+            <span class="tag tag-active">France</span>
+            <span class="tag tag-active">Germany</span>
+            <span class="tag tag-active">KSA</span>
+            <span class="tag tag-active">Mexico</span>
+            <span class="tag tag-active">Spain</span>
+            <span class="tag tag-active">UAE</span>
+          </div>
+          <div class="sub-body">
+            Further affiliates are either planned for Q3 or under evaluation. A <strong>central team of Journey Builder experts</strong> is available for consultancy and support.
+          </div>
+          <div class="contact-box">
+            <strong>Need Journey Builder support?</strong> Reach out to <strong>Irene Martinez / Amaya</strong> for consultancy, configuration guidance, or affiliate onboarding.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════ PILLAR 3: PLATFORMS ═══════════════════ -->
+    <div class="accordion-item" id="pillar-3">
+      <button class="accordion-trigger" onclick="toggle(this)">
+        <div class="trigger-left">
+          <div class="pillar-badge badge-3">🖥️</div>
+          <div>
+            <div class="trigger-title">Pillar 3 — Platforms</div>
+            <div class="trigger-sub">Passport · UE · Landing Pages · Adobe · Coming Soon</div>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="body-divider"></div>
+
+        <!-- Note on cross-pillar -->
+        <div class="sub-body" style="background:#E4EBF1; border-radius:5px; padding:10px 14px; margin-bottom:18px; font-size:12px; color:#212121; border-left:3px solid #99BFE5;">
+          <em>Note: GCCP, WhatsApp, and Journey Builder updates are covered under Pillar 1 and Pillar 2 above.</em>
+        </div>
+
+        <!-- 3a: Passport -->
+        <div class="sub-item">
+          <div class="sub-title">Lilly Passport</div>
+          <div class="sub-body">
+            Passport <strong>dropout rates remain a friction point</strong> under active resolution. IBU Central is focused on both customer experience improvements and underlying platform fixes.<br /><br />
+            Good practices for consent collection beyond Passport have been shared by <strong>Germany, France, UAE, and Canada</strong>. IBU is currently reviewing these approaches and will <strong>share best practices soon</strong> across affiliates.
+          </div>
+        </div>
+
+        <!-- 3b: Unified Experience -->
+        <div class="sub-item">
+          <div class="sub-title">Unified HCP Experience (UE) <span style="margin-left:6px;" class="tag tag-new">Milestone</span></div>
+          <div class="sub-body">
+            The <strong>first HCP brand pages for Foundayo</strong> will go live in <strong>UAE in July 2026</strong>. This marks a significant milestone:
+            <br /><br />
+            • First implementation to include <strong>individual tracking via WebSDK</strong><br />
+            • UAE learnings will be used to assess the impact on customer journey quality and inform wider rollout
+          </div>
+          <div class="contact-box">
+            <strong>For UE and landing page queries:</strong> Contact <strong>Pedro Asensio</strong>.
+          </div>
+        </div>
+
+        <!-- 3c: Landing Pages -->
+        <div class="sub-item">
+          <div class="sub-title">SFMC Landing Pages <span style="margin-left:6px;" class="tag tag-wip">Interim</span></div>
+          <div class="sub-body">
+            As an interim solution until full Unified Experience is available, IBU is building a <strong>standard template for SFMC landing pages</strong>. In parallel, the team is evaluating <strong>Adobe as a future hosting platform</strong> for greater readiness and governance.
+          </div>
+        </div>
+
+        <!-- 3d: Adobe -->
+        <div class="sub-item">
+          <div class="sub-title">Adobe &amp; True Personalization</div>
+          <div class="sub-body">
+            Full personalization capability requires the complete Adobe suite — including <strong>Workfront Planning, AEP, CJA, and AJO</strong>. An important milestone has been reached:<br /><br />
+            <strong>Global has approved a pilot of Adobe Journey Optimizer (AJO)</strong> for <strong>UAE, KSA, and Canada</strong> in 2026, paving the way for omnichannel personalisation at scale in these markets.
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-active">AJO Pilot: UAE</span>
+            <span class="tag tag-active">AJO Pilot: KSA</span>
+            <span class="tag tag-active">AJO Pilot: Canada</span>
+          </div>
+        </div>
+
+        <!-- 3e: Coming Soon -->
+        <div class="sub-item">
+          <div class="sub-title">Under Assessment — Digital District Integration</div>
+          <div class="tag-row" style="margin-bottom:10px;">
+            <span class="tag tag-planned">LARA</span>
+            <span class="tag tag-planned">Sample Request</span>
+          </div>
+          <div class="sub-body">
+            Both <strong>LARA</strong> and <strong>Sample Request</strong> capabilities are currently under assessment for how they will be integrated into the Digital Districts operating model. Timelines and integration approaches will be shared as they are confirmed.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════ PILLAR 4: MEASUREMENT ═══════════════════ -->
+    <div class="accordion-item" id="pillar-4">
+      <button class="accordion-trigger" onclick="toggle(this)">
+        <div class="trigger-left">
+          <div class="pillar-badge badge-4">📊</div>
+          <div>
+            <div class="trigger-title">Pillar 4 — Adaptive Targeting &amp; Measurement</div>
+            <div class="trigger-sub">Reach · Engagement · Intent · CEI · Personas</div>
+          </div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="body-divider"></div>
+
+        <!-- 4a: Reach -->
+        <div class="sub-item">
+          <div class="sub-title">Reach — Universe Definition</div>
+          <div class="sub-body">
+            The Digital Districts <strong>universe definition has been aligned with affiliates</strong> and now serves as the consistent baseline for all tracking, reporting, and targeting activities across markets.
+          </div>
+        </div>
+
+        <!-- 4b: Engagement -->
+        <div class="sub-item">
+          <div class="sub-title">Engagement Tracking</div>
+          <div class="sub-body">
+            Engagement metrics are now <strong>included in the recently launched Digital Districts dashboard</strong>. Access it here:
+            <br /><br />
+            <a href="https://app.powerbi.com/groups/me/reports/bb15842a-ed62-40b4-85af-c462b3b30009/062df73fa7ad671014d1?experience=power-bi" target="_blank">→ Digital Districts Power BI Dashboard</a><br /><br />
+            Current gaps being addressed for engagement measurement:
+            <br /><br />
+            • <strong>Content tagging</strong> — ensuring assets used for Digital Districts are correctly tagged to enable accurate attribution and reporting<br />
+            • <strong>Journey tracking</strong> — maintaining visibility using the <strong>Naming Generator Tool</strong> as the interim standard until Workfront Planning is fully operational
+          </div>
+        </div>
+
+        <!-- 4c: Intent & Adaptive Targeting -->
+        <div class="sub-item">
+          <div class="sub-title">Intent &amp; Adaptive Targeting</div>
+          <div class="sub-body">
+            Discussions are actively underway across several strategic workstreams:
+            <br /><br />
+            • <strong>CEI (Customer Engagement Index) calculations</strong> — piloting with Gulf, Saudi Arabia, and DDH affiliates<br />
+            • <strong>Persona development</strong> — in progress with Italy, Brazil, and Mexico<br />
+            • <strong>Targeting automation</strong> — adaptation work being scoped to operationalise insights from the above
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-wip">CEI Pilot: Gulf · Saudi · DDH</span>
+            <span class="tag tag-wip">Personas: Italy · Brazil · Mexico</span>
+            <span class="tag tag-planned">Targeting Automation: Scoping</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /accordion -->
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="closing-title">From the Team</div>
+    <div class="closing-body">
+      Q2 marks meaningful progress across all four pillars — from consent momentum and active journeys in nine markets, to the upcoming UAE Foundayo UE launch and the AJO pilot approval. As we move into Q3, focus remains on <strong>consent acquisition at scale</strong>, <strong>engagement tracking</strong>, and <strong>advancing CEI / Personas pilots</strong>.<br /><br />
+      Please reach out to <strong>Arjun</strong> for pillar-specific queries. Full country-level data is always available via the Power BI dashboard.
+    </div>
+    <div class="closing-sig">Digital Engagements@Scale Team — IBU Digital &amp; Technology</div>
+  </div>
+
+  <div class="legal">Company Confidential &nbsp;&nbsp;© 2026 Eli Lilly and Company</div>
+
+</div><!-- /main -->
+
+<script>
+  function toggle(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    // close all
+    document.querySelectorAll('.accordion-trigger.open').forEach(t => {
+      t.classList.remove('open');
+      t.nextElementSibling.classList.remove('open');
+    });
+    // open if wasn't open
+    if (!isOpen) {
+      btn.classList.add('open');
+      body.classList.add('open');
+      // smooth scroll
+      setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
+
+  function toggleById(id) {
+    const item = document.getElementById(id);
+    if (!item) return;
+    const btn = item.querySelector('.accordion-trigger');
+    toggle(btn);
+  }
+</script>
+
+</body>
+</html>
